@@ -1,5 +1,6 @@
 import { AbstractEntity } from 'src/common/database/abstract.entity';
 import { USER_ROLE } from 'src/common/enums/user.role.enum';
+import { Message } from 'src/messages/entities/message.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
@@ -21,4 +22,7 @@ export class User extends AbstractEntity<User> {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToMany(() => Message, (mes) => mes.from)
+  messages: Message[];
 }
