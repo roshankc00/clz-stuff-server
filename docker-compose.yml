@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  redis:
+    container_name: redisclz_container
+    image: redis:alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --loglevel warning
+    volumes:
+      - ./docker-volumes/cache:/data
+
+  postgres:
+    container_name: postgresclz_container
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=task-chatter
+      - POSTGRES_PASSWORD=task-chatter
+      - POSTGRES_DB=task-chatter
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./docker-volumes/postgres:/var/lib/postgresql
